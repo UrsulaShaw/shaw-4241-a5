@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class App {
+    start()
+    main()
+}
+
+class MainWindowController {
+    items: ItemModel
+
+    + MainWindowController(ItemModel)
+
+    addItemButtonClicked(EventHandler)
+    editItemButtonClicked(EventHandler)
+    removeSelectedItemButtonClicked(EventHandler)
+    saveInventoryAsCSVButtonClicked(EventHandler)
+    saveInventoryAsHTMLButtonClicked(EventHandler)
+    saveInventoryAsJSONButtonClicked(EventHandler)
+    sortValueButtonClicked(EventHandler)
+    sortSerialNumberButtonClicked(EventHandler)
+    sortNameButtonClicked(EventHandler)
+    searchBySerialNumberClicked(EventHandler)
+    searchByNameClicked(EventHandler)
+
+    addItem(String, String, BigDecimal)
+    editName(String)
+    editSerialNumber(String)
+    editValue(BigDecimal)
+    removeItem()
+
+
+    saveInventoryAsCSV(filename: String)
+    saveInventoryAsHTML(filename: String)
+    saveInventoryAsJSON(filename: String)
+}
+
+class ItemModel {
+    ObservableList<Item>
+}
+
+class Item {
+    - name: SimpleStringProperty
+    - serialNumber: SimpleStringProperty
+    - value: BigDecimal
+
+    + getName()
+    + setName()
+    + nameProperty()
+    + getSerialNumber()
+    + setSerialNumber()
+    + serialNumberProperty()
+    + getValue()
+    + setValue()
+}
+
+openjfx.org.Application <|-- App
+App -- MainWindowController
+MainWindowController o-- ItemModel
+
+ItemModel *-- Item
+
+
+@enduml
