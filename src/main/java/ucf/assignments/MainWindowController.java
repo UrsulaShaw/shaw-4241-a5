@@ -35,6 +35,10 @@ public class MainWindowController {
 
     @FXML
     public void addItemButtonClicked(ActionEvent actionEvent) {
+        addNewItem();
+    }
+
+    public void addNewItem() {
         Item newItem = new Item(nameTextField.getText(),
                 serialNumberTextField.getText(),
                 new BigDecimal(valueTextField.getText()));
