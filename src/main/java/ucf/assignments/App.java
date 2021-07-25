@@ -23,7 +23,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Calculator.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
 
             Scene scene = new Scene(root);
 
