@@ -7,6 +7,7 @@ package ucf.assignments;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,19 +26,15 @@ public class MainWindowController implements Initializable {
     @FXML private TableColumn<Item, String> itemNameColumn;
     @FXML private TableColumn<Item, BigDecimal> itemValueColumn;
 
-    @FXML public TextField searchBar;
+    @FXML public TextField serialNumberSearchBar;
+    @FXML public TextField nameSearchBar;
     @FXML public TextField valueTextField;
     @FXML public TextField nameTextField;
     @FXML public TextField serialNumberTextField;
 
-    @FXML public ToggleButton sortBySNToggleButton;
-    @FXML public ToggleButton sortByNameToggleButton;
-
-    @FXML public CheckBox searchBySNCheckbox;
-    @FXML public CheckBox searchByNameCheckbox;
-
     @FXML public Button addItemButton;
     @FXML public Button deleteSelectedButton;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,7 +47,6 @@ public class MainWindowController implements Initializable {
         inventory.setEditable(true);
         itemNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         itemSerialNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
     }
 
     public ObservableList<Item> getItems() {
@@ -67,16 +63,17 @@ public class MainWindowController implements Initializable {
         Item newItem = new Item(nameTextField.getText(),
                 serialNumberTextField.getText(),
                 new BigDecimal(valueTextField.getText()));
+
         // get all the items in the inventory and add the new item
         inventory.getItems().add(newItem);
+
+        clearNewItemFields();
     }
 
-    @FXML
-    public void sortSerialNumberButtonClicked(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void sortNameButtonClicked(ActionEvent actionEvent) {
+    private void clearNewItemFields() {
+        nameTextField.setText("");
+        serialNumberTextField.setText("");
+        valueTextField.setText("");
     }
 
     @FXML
@@ -113,9 +110,6 @@ public class MainWindowController implements Initializable {
         itemSelected.setValue(new BigDecimal(cell.getNewValue().toString()));
     }
 
-    public Item addNewItem(String serialNumber, String name, BigDecimal value) {
-        return new Item(serialNumber, name, value);
-    }
 
 
 }
